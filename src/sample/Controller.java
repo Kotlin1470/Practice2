@@ -8,6 +8,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.scene.control.Alert;
+
+
 
 import java.util.ArrayList;
 
@@ -32,6 +35,7 @@ public class Controller {
     private TextField numDemVer;
     @FXML
     private TextArea textArea;
+    private Alert alert;
     private static int amountV = 0;
     private static int amountE = 0;
     private ArrayList<VertexGraph> listVertex = new ArrayList<>();
@@ -177,5 +181,12 @@ public class Controller {
         for (EdgeGraph edge : listEdge) {
             textArea.appendText("Ребро № " + ++i + "\n" + edge.getVertexGraphStart().getNum() + " -> " + edge.getVertexGraphEnd().getNum() + "\n" + "Длина ребра: " + edge.getLength() + "\n");
         }
+    }
+
+    public void error(String s) {
+        alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Некорректный ввод");
+        alert.setHeaderText(s);
+        alert.showAndWait();
     }
 }

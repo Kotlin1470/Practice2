@@ -36,7 +36,7 @@
                                 <Cursor fx:constant="HAND" />
                             </cursor>
                         </Button>
-                        <Button defaultButton="true" layoutX="811.0" layoutY="392.0" mnemonicParsing="false" onAction="#shortestPathProblem" prefHeight="54.0" prefWidth="237.0" text="Алгоритм Дейкстры" textFill="#3585da" AnchorPane.bottomAnchor="151.0">
+                        <Button defaultButton="true" layoutX="811.0" layoutY="392.0" mnemonicParsing="false" onAction="#Ostov" prefHeight="54.0" prefWidth="237.0" text="Алгоритм Дейкстры" textFill="#3585da" AnchorPane.bottomAnchor="151.0">
                             <font>
                                 <Font size="14.0" />
                             </font>
