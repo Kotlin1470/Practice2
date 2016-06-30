@@ -154,8 +154,6 @@ public class Controller {
     @FXML
     public void deleteGraph() {
         textArea.clear();
-        startVertex.clear();
-        endVertex.clear();
         vertexGraph2.clear();
         vertexGraph1.clear();
         graphX.clear();
