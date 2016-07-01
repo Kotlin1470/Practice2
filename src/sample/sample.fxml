@@ -64,7 +64,7 @@
             <Label layoutX="201.0" layoutY="191.0" text="8" />
             <Label layoutX="201.0" layoutY="152.0" text="9" />
             <Label layoutX="196.0" layoutY="119.0" text="10" />
-            <Button layoutX="972.0" layoutY="73.0" mnemonicParsing="false" onAction="#handleAddVertexGraph" prefHeight="54.0" prefWidth="95.0" text="Добавить граф" textAlignment="CENTER" wrapText="true" />
+            <Button layoutX="972.0" layoutY="73.0" mnemonicParsing="false" onAction="#handleAddVertexGraph" prefHeight="54.0" prefWidth="95.0" text="Добавить вершину" textAlignment="CENTER" wrapText="true" />
             <Label layoutX="830.0" layoutY="46.0" text="Введите координаты графа" />
             <Label layoutX="850.0" layoutY="79.0" text="X" />
             <Label layoutX="851.0" layoutY="108.0" text="Y" />

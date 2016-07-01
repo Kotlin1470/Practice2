@@ -8,7 +8,7 @@ import java.util.Comparator;
  *  В данном классе описана структура управления ребрами графа.
  *  @author NiPaYu
  */
-public class EdgeGraph implements Comparable<EdgeGraph> {
+public class EdgeGraph {
     private VertexGraph vertexGraphStart; // вершина, из которой выходит ребро
     private VertexGraph vertexGraphEnd; // вершина, в которую входит ребро
     private double length; // длина ребра
@@ -61,38 +61,7 @@ public class EdgeGraph implements Comparable<EdgeGraph> {
         this.length = length;
     }
 
-    /**
-     * Реализация своего compareTo
-     * @param o объект данного класса
-     * @return
-     */
-    @Override
-    public int compareTo(EdgeGraph o) {
-        int result;
-        if (this.getVertexGraphStart().getNum() > (o.getVertexGraphStart().getNum())) {
-            result = 1;
-        } else if (this.getVertexGraphStart().getNum() == (o.getVertexGraphStart().getNum())) {
-            result = 0;
-        } else {
-            result = -1;
-        }
-        if (result == 0) {
-            if (this.getVertexGraphEnd().getNum() > (o.getVertexGraphEnd().getNum())) {
-                result = 1;
-            } else {
-                result = -1;
-            }
-        }
-        return result;
-    }
 
-
-    static class EdgeCompare implements Comparator<EdgeGraph> {
-
-        public int compare(EdgeGraph e1, EdgeGraph e2) {
-            return e1.compareTo(e2);
-        }
-    }
 }
 
 

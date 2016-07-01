@@ -75,19 +75,18 @@ public class Controller {
         }
     }
 
+    //Функция поиска минимального остовного дерева
     @FXML
     public void find_mst(){
-        ArrayList<EdgeGraph> e = listEdge;
-        ArrayList<VertexGraph> v = listVertex;
         if(listEdge.isEmpty() || listVertex.isEmpty())
             error("Пожалуйста, заполните введите хоть какие-то данные");
-        double [][] m=new double[listVertex.size()][listVertex.size()];
+        double [][] m=new double[listVertex.size()][listVertex.size()]; //Матрица смежности и её создание из двух массивов
         for (int i = 0; i < listEdge.size(); ++i){
             m[listEdge.get(i).getVertexGraphStart().getNum() - 1][listEdge.get(i).getVertexGraphEnd().getNum() - 1]=listEdge.get(i).getLength();
             m[listEdge.get(i).getVertexGraphEnd().getNum() - 1][listEdge.get(i).getVertexGraphStart().getNum() - 1]=listEdge.get(i).getLength();
         }
         int inf=10000000;
-        ArrayList<EdgeGraph> g = new ArrayList<>();
+        ArrayList<EdgeGraph> g = new ArrayList<>(); //Массив, содержщий ребра только МОД
         boolean[] used = new boolean[m.length];
         double min;
         int x = inf,y = inf;
@@ -146,12 +145,13 @@ public class Controller {
     public void setDefaultLine(int width) {
         for (EdgeGraph edge : listEdge) {
             pane.getChildren().remove(edge.line);
+            edge.line.setStroke(Color.BLACK);
             edge.line.setStrokeWidth(width);
             pane.getChildren().add(edge.line);
         }
     }
 
-    public void paintLine(int first, int second, int mod){
+    public void paintLine(int first, int second, int mod) {
         VertexGraph vertexGraph1 = listVertex.get(first);
         VertexGraph vertexGraph2 = listVertex.get(second);
         double length = getLength(vertexGraph1.getX(), vertexGraph1.getY(), vertexGraph2.getX(), vertexGraph2.getY());
@@ -169,14 +169,13 @@ public class Controller {
                         vertexGraph1.getY() - shiftY + 10,
                         vertexGraph2.getX() - shiftX,
                         vertexGraph2.getY() + shiftY + 10));
-        edgeGraph.line.setStroke(Color.BLACK);
-        if(mod != 1)
+        if (mod == 1) {
+            edgeGraph.line.setStroke(Color.BLACK);
+            listEdge.add(edgeGraph);
+        } else {
             edgeGraph.line.setStroke(Color.RED);
-        listEdge.add(edgeGraph);
-
-
+        }
         pane.getChildren().add(edgeGraph.line);
-
     }
 
     public double getLength(int x, int y, int x1, int y1) {
