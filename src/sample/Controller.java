@@ -79,12 +79,12 @@ public class Controller {
     public void find_mst(){
         ArrayList<EdgeGraph> e = listEdge;
         ArrayList<VertexGraph> v = listVertex;
-        if(e.isEmpty() || v.isEmpty())
-            throw new IllegalArgumentException("No MST");
-        double [][] m=new double[v.size()][v.size()];
-        for (int i = 0; i < e.size(); ++i){
-            m[e.get(i).getVertexGraphStart().getNum() - 1][e.get(i).getVertexGraphEnd().getNum() - 1]=e.get(i).getLength();
-            m[e.get(i).getVertexGraphEnd().getNum() - 1][e.get(i).getVertexGraphStart().getNum() - 1]=e.get(i).getLength();
+        if(listEdge.isEmpty() || listVertex.isEmpty())
+            error("Пожалуйста, заполните введите хоть какие-то данные");
+        double [][] m=new double[listVertex.size()][listVertex.size()];
+        for (int i = 0; i < listEdge.size(); ++i){
+            m[listEdge.get(i).getVertexGraphStart().getNum() - 1][listEdge.get(i).getVertexGraphEnd().getNum() - 1]=listEdge.get(i).getLength();
+            m[listEdge.get(i).getVertexGraphEnd().getNum() - 1][listEdge.get(i).getVertexGraphStart().getNum() - 1]=listEdge.get(i).getLength();
         }
         int inf=10000000;
         ArrayList<EdgeGraph> g = new ArrayList<>();
@@ -101,24 +101,18 @@ public class Controller {
                             min = m[j][k];
                             x = j;y = k;
                         }
-            for (int k = 0;k < e.size(); ++k)
-                if((e.get(k).getVertexGraphStart().getNum() - 1 == x && e.get(k).getVertexGraphEnd().getNum() - 1 == y) || (e.get(k).getVertexGraphStart().getNum() - 1 == y && e.get(k).getVertexGraphEnd().getNum() - 1 == x))
-                    g.add(e.get(i));
+            for (int k = 0;k < listEdge.size(); ++k)
+                if((listEdge.get(k).getVertexGraphStart().getNum() - 1 == x && listEdge.get(k).getVertexGraphEnd().getNum() - 1 == y) || (listEdge.get(k).getVertexGraphStart().getNum() - 1 == y && listEdge.get(k).getVertexGraphEnd().getNum() - 1 == x))
+                    g.add(listEdge.get(i));
 
 
             m[x][y] = 0;//x и y концы очередного добавленного ребра
             m[y][x] = 0;
             used[y] = true;//если где то здесь накапливать min получим вес мод'а, не знаю надо оно нам или нет
         }
-        for(int i = 0; i < used.length; i++)
-        {
-            used[i] = false;
-        }
-
         for (EdgeGraph edge: g) {
             paintLine(edge.getVertexGraphStart().getNum()-1, edge.getVertexGraphEnd().getNum()-1, 2);
         }
-        g.clear();
     }
 
     @FXML
