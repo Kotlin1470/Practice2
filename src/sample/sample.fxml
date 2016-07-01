@@ -27,12 +27,16 @@
       <children>
         <AnchorPane layoutY="-14.0" prefHeight="597.0" prefWidth="1106.0">
           <children>
-            <Button layoutX="940.0" layoutY="163.0" mnemonicParsing="false" onAction="#handleAddEdge" prefHeight="54.0" prefWidth="107.0" text="Добавить ребро" />
-
-            <Label text="Задайте вершины:" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" AnchorPane.leftAnchor="859.0" AnchorPane.topAnchor="137.0" />
-            <TextArea fx:id="textArea" prefHeight="516.0" prefWidth="182.0" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="69.0" />
+            <Button layoutX="972.0" layoutY="187.0" mnemonicParsing="false" onAction="#handleAddEdge" prefHeight="54.0" prefWidth="95.0" text="Добавить ребро" textAlignment="CENTER" wrapText="true" />
+            <Button defaultButton="true" layoutX="830.0" mnemonicParsing="false" onAction="#find_mst" prefHeight="54.0" prefWidth="237.0" text="ЯПД" textFill="BLACK" AnchorPane.bottomAnchor="99.0">
+              <font>
+                <Font size="14.0" />
+              </font>
+            </Button>
+            <Label text="Задайте вершины:" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" AnchorPane.leftAnchor="830.0" AnchorPane.topAnchor="148.0" />
+            <TextArea fx:id="textArea" prefHeight="530.0" prefWidth="161.0" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="69.0" />
             <Label layoutY="45.0" text="Статус" AnchorPane.leftAnchor="14.0" />
-            <Line endX="-90.0" endY="400.0" layoutX="301.0" layoutY="94.0" startX="-90.0" startY="10.0" />
+            <Line endX="-90.0" endY="400.0" layoutX="307.0" layoutY="94.0" startX="-90.0" startY="10.0" />
             <Line endX="500.0" endY="-40.0" layoutX="303.0" layoutY="535.0" startX="-90.0" startY="-40.0" />
             <Label layoutX="207.0" layoutY="500.0" text="0" />
             <Label layoutX="246.0" layoutY="500.0" text="1" />
@@ -60,38 +64,19 @@
             <Label layoutX="201.0" layoutY="191.0" text="8" />
             <Label layoutX="201.0" layoutY="152.0" text="9" />
             <Label layoutX="196.0" layoutY="119.0" text="10" />
-            <Button layoutX="940.0" layoutY="74.0" mnemonicParsing="false" onAction="#handleAddVertexGraph" prefHeight="61.0" prefWidth="107.0" text="Добавить граф" textAlignment="JUSTIFY" />
-            <Label layoutX="854.0" layoutY="46.0" text="Введите координаты графа" />
+            <Button layoutX="972.0" layoutY="73.0" mnemonicParsing="false" onAction="#handleAddVertexGraph" prefHeight="54.0" prefWidth="95.0" text="Добавить граф" textAlignment="CENTER" wrapText="true" />
+            <Label layoutX="830.0" layoutY="46.0" text="Введите координаты графа" />
             <Label layoutX="850.0" layoutY="79.0" text="X" />
             <Label layoutX="851.0" layoutY="108.0" text="Y" />
             <TextField fx:id="graphX" layoutX="871.0" layoutY="75.0" prefHeight="25.0" prefWidth="59.0" />
             <TextField fx:id="graphY" layoutX="871.0" layoutY="104.0" prefHeight="25.0" prefWidth="59.0" />
-            <Label layoutX="805.0" layoutY="195.0" text="Конечная" />
-            <Label layoutX="803.0" text="Начальная" AnchorPane.topAnchor="168.0" />
-            <TextField fx:id="vertexGraph1" layoutX="871.0" prefHeight="25.0" prefWidth="59.0" AnchorPane.topAnchor="164.0" />
-            <TextField fx:id="vertexGraph2" layoutX="871.0" prefHeight="25.0" prefWidth="59.0" AnchorPane.topAnchor="191.0" />
-            <Button layoutX="819.0" layoutY="230.0" mnemonicParsing="false" onAction="#displayCoordinates" prefHeight="25.0" prefWidth="227.0" text="Вывести координаты" />
-            <Button layoutX="819.0" layoutY="261.0" mnemonicParsing="false" onAction="#displayEdge" prefHeight="25.0" prefWidth="227.0" text="Вывести ребра" />
-            <MenuBar prefHeight="25.0" prefWidth="1129.0" AnchorPane.bottomAnchor="558.0" AnchorPane.leftAnchor="-14.0" AnchorPane.rightAnchor="-43.0" AnchorPane.topAnchor="14.0">
-              <menus>
-                <Menu mnemonicParsing="false" text="File">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Close" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Delete" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
-                  </items>
-                </Menu>
-              </menus>
-            </MenuBar>
-            <Pane fx:id="pane" layoutX="213.0" layoutY="105.0" prefHeight="391.0" prefWidth="591.0" />
+            <Label layoutX="831.0" layoutY="209.0" prefHeight="41.0" prefWidth="80.0" text="Конечная" />
+            <Label layoutX="830.0" prefHeight="38.0" prefWidth="80.0" text="Начальная" AnchorPane.topAnchor="176.0" />
+            <TextField fx:id="vertexGraph1" layoutX="910.0" prefHeight="27.0" prefWidth="44.0" AnchorPane.topAnchor="182.0" />
+            <TextField fx:id="vertexGraph2" layoutX="910.0" prefHeight="26.999908447265625" prefWidth="44.0" AnchorPane.topAnchor="216.0" />
+            <Button layoutX="830.0" layoutY="339.0" mnemonicParsing="false" onAction="#displayCoordinates" prefHeight="38.0" prefWidth="237.0" text="Вывести координаты" />
+            <Button layoutX="830.0" layoutY="393.0" mnemonicParsing="false" onAction="#displayEdge" prefHeight="38.0" prefWidth="237.0" text="Вывести ребра" />
+            <Pane fx:id="pane" layoutX="212.0" layoutY="112.0" prefHeight="373.0" prefWidth="578.5" />
             <Button layoutX="348.0" layoutY="565.0" mnemonicParsing="false" onAction="#deleteGraph" prefHeight="25.0" prefWidth="320.0" text="Удалить граф" />
           </children>
         </AnchorPane>

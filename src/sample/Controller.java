@@ -40,7 +40,7 @@ public class Controller {
     private static int amountE = 0;
     private ArrayList<VertexGraph> listVertex = new ArrayList<>();
     private ArrayList<EdgeGraph> listEdge = new ArrayList<>();
-
+    @FXML
     public void handleAddVertexGraph() {
         setDefaultLine(1);
         if (graphX.getText() == null || graphX.getText().length() == 0) {
@@ -76,6 +76,52 @@ public class Controller {
     }
 
     @FXML
+    public void find_mst(){
+        ArrayList<EdgeGraph> e = listEdge;
+        ArrayList<VertexGraph> v = listVertex;
+        if(e.isEmpty() || v.isEmpty())
+            throw new IllegalArgumentException("No MST");
+        double [][] m=new double[v.size()][v.size()];
+        for (int i = 0; i < e.size(); ++i){
+            m[e.get(i).getVertexGraphStart().getNum() - 1][e.get(i).getVertexGraphEnd().getNum() - 1]=e.get(i).getLength();
+            m[e.get(i).getVertexGraphEnd().getNum() - 1][e.get(i).getVertexGraphStart().getNum() - 1]=e.get(i).getLength();
+        }
+        int inf=10000000;
+        ArrayList<EdgeGraph> g = new ArrayList<>();
+        boolean[] used = new boolean[m.length];
+        double min;
+        int x = inf,y = inf;
+        used[0] = true;
+        for (int i = 0;i < m.length - 1; ++i){
+            min = inf;
+            for (int j=0;j < m.length; ++j)
+                if(used[j])
+                    for (int k = 0;k < m.length; ++k)
+                        if(m[j][k] < min && m[j][k] > 0){
+                            min = m[j][k];
+                            x = j;y = k;
+                        }
+            for (int k = 0;k < e.size(); ++k)
+                if((e.get(k).getVertexGraphStart().getNum() - 1 == x && e.get(k).getVertexGraphEnd().getNum() - 1 == y) || (e.get(k).getVertexGraphStart().getNum() - 1 == y && e.get(k).getVertexGraphEnd().getNum() - 1 == x))
+                    g.add(e.get(i));
+
+
+            m[x][y] = 0;//x и y концы очередного добавленного ребра
+            m[y][x] = 0;
+            used[y] = true;//если где то здесь накапливать min получим вес мод'а, не знаю надо оно нам или нет
+        }
+        for(int i = 0; i < used.length; i++)
+        {
+            used[i] = false;
+        }
+
+        for (EdgeGraph edge: g) {
+            paintLine(edge.getVertexGraphStart().getNum()-1, edge.getVertexGraphEnd().getNum()-1, 2);
+        }
+        g.clear();
+    }
+
+    @FXML
     public void handleAddEdge() {
         setDefaultLine(1);
         if (vertexGraph1.getText() == null || vertexGraph1.getText().length() == 0) {
@@ -93,7 +139,7 @@ public class Controller {
                     if (x == y) {
                         error("Выберите различные вершины.");
                     } else {
-                        paintLine(x-1,y-1);
+                        paintLine(x-1,y-1,1);
                     }
                 } catch (NumberFormatException ex) {
                     ex.printStackTrace();
@@ -111,7 +157,7 @@ public class Controller {
         }
     }
 
-    public void paintLine(int first, int second){
+    public void paintLine(int first, int second, int mod){
         VertexGraph vertexGraph1 = listVertex.get(first);
         VertexGraph vertexGraph2 = listVertex.get(second);
         double length = getLength(vertexGraph1.getX(), vertexGraph1.getY(), vertexGraph2.getX(), vertexGraph2.getY());
@@ -129,19 +175,14 @@ public class Controller {
                         vertexGraph1.getY() - shiftY + 10,
                         vertexGraph2.getX() - shiftX,
                         vertexGraph2.getY() + shiftY + 10));
+        edgeGraph.line.setStroke(Color.BLACK);
+        if(mod != 1)
+            edgeGraph.line.setStroke(Color.RED);
         listEdge.add(edgeGraph);
-        Line line1 = new Line(vertexGraph2.getX() - shiftX, vertexGraph2.getY() + shiftY + 10,
-                vertexGraph2.getX() + Math.sin(angle1 - Math.PI / 3) * 10 - shiftX,
-                vertexGraph2.getY() + Math.cos(angle1 - Math.PI / 3) * 10 + shiftY + 10);
-        Line line2 = new Line(vertexGraph2.getX() - shiftX, vertexGraph2.getY() + shiftY + 10,
-                vertexGraph2.getX() + Math.sin(angle1 - Math.PI + Math.PI / 3) * 10 - shiftX,
-                vertexGraph2.getY() + Math.cos(angle1 - Math.PI + Math.PI / 3) * 10 + shiftY + 10);
-        edgeGraph.line.setFill(Color.GRAY);
-        line1.setFill(Color.GRAY);
-        line2.setFill(Color.GRAY);
+
+
         pane.getChildren().add(edgeGraph.line);
-        pane.getChildren().add(line1);
-        pane.getChildren().add(line2);
+
     }
 
     public double getLength(int x, int y, int x1, int y1) {
@@ -187,4 +228,6 @@ public class Controller {
         alert.setHeaderText(s);
         alert.showAndWait();
     }
+
+
 }
